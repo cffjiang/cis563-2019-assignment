@@ -1,0 +1,4 @@
+build/*
+include/osqp_configure.h
+lin_sys/direct/qdldl/qdldl_sources/include/qdldl_types.h
+
