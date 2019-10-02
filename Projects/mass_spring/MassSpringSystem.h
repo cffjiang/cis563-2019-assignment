@@ -26,22 +26,32 @@ public:
     {
         f.clear();
         f.resize(x.size(), TV::Zero());
-
-	///////////////////////////////////////////////
-	//  ASSIGNMENT ////////////////////////////////
-	//  Add you code to build f /////////////////// 
-	///////////////////////////////////////////////
+        for (size_t i=0; i<segments.size(); ++i)
+        {
+            int A = segments[i](0);
+            int B = segments[i](1);
+            T l = (x[A]-x[B]).norm();
+            TV n = (x[A]-x[B]).normalized();
+            TV force = -youngs_modulus*(l/rest_length[i]-(T)1)*n;
+            f[A] += force;
+            f[B] -= force;
+        }
     }
 
     void evaluateDampingForces(std::vector<TV >& f)
     {
         f.clear();
         f.resize(x.size(), TV::Zero());
-
-	///////////////////////////////////////////////
-	//  ASSIGNMENT ////////////////////////////////
-	//  Add you code to build f /////////////////// 
-	///////////////////////////////////////////////
+        for (size_t i=0; i<segments.size(); ++i)
+        {
+            int A = segments[i](0);
+            int B = segments[i](1);
+            TV n = (x[A]-x[B]).normalized();
+            Eigen::Matrix<T,dim,dim> nn = n * n.transpose();
+            TV force = -damping_coeff * nn * (v[A]-v[B]);
+            f[A] += force;
+            f[B] -= force;
+        }
     }
 
     void dumpPoly(std::string filename)
