@@ -164,9 +164,9 @@ option(LIBIGL_WITH_XML               "Use XML"            OFF)
 find_package(LIBIGL REQUIRED QUIET)
 
 # tbb
-include(Deps/tbb/cmake/TBBGet.cmake)
-tbb_get(TBB_ROOT tbb_root CONFIG_DIR TBB_DIR)
-find_package(TBB REQUIRED tbb)
+#include(Deps/tbb/cmake/TBBGet.cmake)
+#tbb_get(TBB_ROOT tbb_root CONFIG_DIR TBB_DIR)
+#find_package(TBB REQUIRED tbb)
 
 ##########################
 
